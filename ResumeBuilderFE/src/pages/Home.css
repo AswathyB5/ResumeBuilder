@@ -1,0 +1,40 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#Home{
+    background-image: url(../assets/Homebg.png);
+    height: 75vh;
+    width:100%;
+    background-size: cover;
+    background-attachment: fixed;
+}
+#box{
+        background-color: #faebd74a;
+        text-align: center;
+        border-color: white;
+}
+#btn1{
+    background-color: #350463;
+}
+
+#mainhead{
+    font-size: 30px;
+}
+#subhead{
+    font-size: 20px;
+}
+#third-page{
+    background-image: url(../assets/img.jpg);
+    background-size: cover;
+    width:100%;
+    height:80vh;
+    background-attachment: fixed;
+    
+}
+#link{
+    text-decoration: none;
+    color:white;
+}
