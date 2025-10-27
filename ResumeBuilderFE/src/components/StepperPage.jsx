@@ -6,13 +6,10 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { duration } from "@mui/material/styles";
 import { addResume } from "../services/AllApi";
 import Swal from "sweetalert2";
 
 const StepperPage = ({ resumeData, setResumeData }) => {
-  //Array to show all the steps in the stepper,this is to show the steps in top of the component
-
   const [skills, setSkills] = useState([
     "React",
     "Node",
@@ -21,39 +18,39 @@ const StepperPage = ({ resumeData, setResumeData }) => {
     "MongoDB",
   ]);
   const [skillinput, setSkillinput] = useState("");
-  const [skillArray, setskillArray] = useState([]);
 
   const createResume = async () => {
     try {
       if (
-        resumeData.fullName == "" ||
-        resumeData.location == "" ||
-        resumeData.email == "" ||
-        resumeData.phno == "" ||
-        resumeData.github == "" ||
-        resumeData.linkedin == "" ||
-        resumeData.portfolio == "" ||
-        resumeData.summary == "" ||
-        resumeData.title == "" ||
-        resumeData.coursename == "" ||
-        resumeData.college == "" ||
-        resumeData.university == "" ||
-        resumeData.year == "" ||
-        resumeData.company == "" ||
-        resumeData.location == "" ||
-        resumeData.duration == "" ||
-        resumeData.jobtitle == "" ||
-        resumeData.skills == []
+        resumeData.fullName === "" ||
+        resumeData.location === "" ||
+        resumeData.email === "" ||
+        resumeData.phno === "" ||
+        resumeData.github === "" ||
+        resumeData.linkedin === "" ||
+        resumeData.portfolio === "" ||
+        resumeData.summary === "" ||
+        resumeData.title === "" ||
+        resumeData.coursename === "" ||
+        resumeData.college === "" ||
+        resumeData.university === "" ||
+        resumeData.year === "" ||
+        resumeData.company === "" ||
+        resumeData.duration === "" ||
+        resumeData.jobtitle === "" ||
+        !resumeData.skills ||
+        resumeData.skills.length === 0
       ) {
-         Swal.fire({
-           title: "Resume Empty",
-           text: "Please Fill all the details",
-           icon: "question",
-         });
+        Swal.fire({
+          title: "Resume Empty",
+          text: "Please fill all the details",
+          icon: "question",
+        });
       } else {
-        let apiResponse = await addResume(resumeData);
-        console.log(apiResponse);
      
+        let apiResponse = await addResume(resumeData);
+        console.log(apiResponse.data);
+
         Swal.fire({
           title: "Resume Created Successfully!",
           text: "Your resume has been saved.",
@@ -62,18 +59,16 @@ const StepperPage = ({ resumeData, setResumeData }) => {
         });
       }
     } catch (error) {
-      alert("Error occured");
+      alert("Error occurred");
       console.log(error);
     }
   };
 
   const pushSkill = (skill) => {
     if (resumeData.skills.includes(skill)) {
-      alert("skill already added");
+      alert("Skill already added");
     } else {
-      //setskillArray([...skillArray, skill]);
       setResumeData({ ...resumeData, skills: [...resumeData.skills, skill] });
-      console.log(skillArray);
     }
   };
 
@@ -81,28 +76,20 @@ const StepperPage = ({ resumeData, setResumeData }) => {
     "Basic Information",
     "Contact Details",
     "Education Details",
-    "Work Expierence",
+    "Work Experience",
     "Skills & Certifications",
     "Review & Submit",
   ];
 
-  //state to handle active steps
-
-  const [activeStep, setActiveStep] = React.useState(0); //React. used beacuse useState is not imported
-
-  //Next Button function
+  const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  //Back Button function
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  //Reset Button function
 
   const handleReset = () => {
     setActiveStep(0);
@@ -125,19 +112,18 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                 label="Full Name"
                 variant="standard"
                 sx={{ width: "100%" }}
+                value={resumeData.fullName}
               />
-
               <TextField
                 onChange={(e) =>
                   setResumeData({ ...resumeData, title: e.target.value })
                 }
                 id="title"
-                label="title"
+                label="Title"
                 variant="standard"
                 sx={{ width: "100%" }}
                 value={resumeData.title}
               />
-
               <TextField
                 onChange={(e) =>
                   setResumeData({ ...resumeData, location: e.target.value })
@@ -151,14 +137,13 @@ const StepperPage = ({ resumeData, setResumeData }) => {
             </Box>
           </div>
         );
-        break;
+
       case 1:
         return (
           <div>
             <Typography variant="h4" sx={{ mt: 3 }}>
               Contact Details
             </Typography>
-
             <Box>
               <TextField
                 onChange={(e) =>
@@ -170,7 +155,6 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                 sx={{ width: "100%" }}
                 value={resumeData.email}
               />
-
               <TextField
                 onChange={(e) =>
                   setResumeData({ ...resumeData, phno: e.target.value })
@@ -181,7 +165,6 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                 sx={{ width: "100%" }}
                 value={resumeData.phno}
               />
-
               <TextField
                 onChange={(e) =>
                   setResumeData({ ...resumeData, github: e.target.value })
@@ -207,7 +190,7 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                   setResumeData({ ...resumeData, portfolio: e.target.value })
                 }
                 id="portfoliolink"
-                label="Portflio Link"
+                label="Portfolio Link"
                 variant="standard"
                 sx={{ width: "100%" }}
                 value={resumeData.portfolio}
@@ -215,11 +198,11 @@ const StepperPage = ({ resumeData, setResumeData }) => {
             </Box>
           </div>
         );
-        break;
+
       case 2:
         return (
           <div>
-            <Typography sx={{ mt: 3 }}>Educational Details </Typography>
+            <Typography sx={{ mt: 3 }}>Educational Details</Typography>
             <Box>
               <TextField
                 onChange={(e) =>
@@ -231,7 +214,6 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                 sx={{ width: "100%" }}
                 value={resumeData.coursename}
               />
-
               <TextField
                 id="collegename"
                 onChange={(e) =>
@@ -242,7 +224,6 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                 sx={{ width: "100%" }}
                 value={resumeData.college}
               />
-
               <TextField
                 onChange={(e) =>
                   setResumeData({ ...resumeData, university: e.target.value })
@@ -266,11 +247,11 @@ const StepperPage = ({ resumeData, setResumeData }) => {
             </Box>
           </div>
         );
-        break;
+
       case 3:
         return (
           <div>
-            <Typography sx={{ mt: 3 }}>Work Expirence Details</Typography>
+            <Typography sx={{ mt: 3 }}>Work Experience Details</Typography>
             <Box>
               <TextField
                 onChange={(e) =>
@@ -282,7 +263,6 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                 sx={{ width: "100%" }}
                 value={resumeData.jobtitle}
               />
-
               <TextField
                 onChange={(e) =>
                   setResumeData({ ...resumeData, company: e.target.value })
@@ -293,7 +273,6 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                 sx={{ width: "100%" }}
                 value={resumeData.company}
               />
-
               <TextField
                 onChange={(e) =>
                   setResumeData({ ...resumeData, joblocation: e.target.value })
@@ -317,7 +296,7 @@ const StepperPage = ({ resumeData, setResumeData }) => {
             </Box>
           </div>
         );
-        break;
+
       case 4:
         return (
           <div>
@@ -328,7 +307,7 @@ const StepperPage = ({ resumeData, setResumeData }) => {
               <TextField
                 onChange={(e) => setSkillinput(e.target.value)}
                 id="skills"
-                label="Add SKill"
+                label="Add Skill"
                 variant="standard"
                 sx={{ width: "100%" }}
               />
@@ -342,8 +321,9 @@ const StepperPage = ({ resumeData, setResumeData }) => {
             </Box>
             <Typography>Suggestions</Typography>
             <Box>
-              {skills.map((eachskills) => (
+              {skills.map((eachskills, index) => (
                 <Button
+                  key={index}
                   onClick={() => pushSkill(eachskills)}
                   variant="outlined"
                   sx={{ ml: 2 }}
@@ -354,7 +334,7 @@ const StepperPage = ({ resumeData, setResumeData }) => {
             </Box>
           </div>
         );
-        break;
+
       case 5:
         return (
           <div>
@@ -368,36 +348,32 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                 label="Summary"
                 variant="standard"
                 sx={{ width: "100%" }}
+                value={resumeData.summary}
               />
             </Box>
           </div>
         );
-        break;
+
       default:
-        break;
+        return null;
     }
   };
 
   return (
     <div>
-      {/* div with full width */}
       <Box sx={{ width: "100%" }}>
         <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => {
-            const stepProps = {};
-            const labelProps = {};
-
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            );
-          })}
+          {steps.map((label, index) => (
+            <Step key={index}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
         </Stepper>
+
         {activeStep === steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>
-              <h1> All steps completed - you&apos;re finished</h1>
+              <h1>All steps completed - you're finished</h1>
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Box sx={{ flex: "1 1 auto" }} />
@@ -406,7 +382,6 @@ const StepperPage = ({ resumeData, setResumeData }) => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
             {renderDetails(activeStep)}
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2, mt: 2 }}>
               <Button
@@ -418,7 +393,6 @@ const StepperPage = ({ resumeData, setResumeData }) => {
                 Back
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
-
               {activeStep === steps.length - 1 ? (
                 <Button onClick={createResume}>Finish</Button>
               ) : (
