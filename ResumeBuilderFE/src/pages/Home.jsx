@@ -10,7 +10,7 @@ import p1 from '../assets/p1.png'
 import p2 from "../assets/p2.png";
 import p3 from "../assets/p3.png";
 import p4 from "../assets/p4.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { Link } from "react-router-dom";
 import LandingPage from "./LandingPage";
 
@@ -29,9 +29,12 @@ const Home = () => {
               Your skills,your story,your next job --all <br />
               in one
             </Card.Subtitle>
-            <Button variant="secondary" id="btn1">
-              <Link to={"LandingPage"} id="link"> MAKE YOUR RESUME</Link>
-            </Button>
+            <Link to={"LandingPage"} id="link">
+              {" "}
+              <Button variant="secondary" id="btn1">
+                MAKE YOUR RESUME
+              </Button>
+            </Link>
           </Card.Body>
         </Card>
       </section>

@@ -4,8 +4,6 @@ const Mycard = ({ icon, title, description, step }) => {
   return (
     <div className="container text-center">
 
-
-
             <Card>
               <Card.Body>
                 <Card.Title>{icon}</Card.Title>
