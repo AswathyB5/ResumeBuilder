@@ -8,3 +8,6 @@ export const addResume =async(reqBody)=>{
 export const displayResume =async()=>{
     return await commonApi("get",`${BaseUrl}/resume`,"")
 }
+export const deleteResume =async(id)=> {
+    return await commonApi("delete",`${BaseUrl}/resume/${id}`)
+}
