@@ -11,3 +11,6 @@ export const displayResume =async()=>{
 export const deleteResume =async(id)=> {
     return await commonApi("delete",`${BaseUrl}/resume/${id}`)
 }
+export const editsaveData =async(id,reqBody)=>{
+    return await commonApi("put", `${BaseUrl}/resume/${id}`,reqBody);
+}

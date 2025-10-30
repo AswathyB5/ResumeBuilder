@@ -3,3 +3,7 @@
 In react||lifting state up refers to the technique of moving a shared state to a common ancestor of the components that need to accesss or modify it.Instead of maintaining seprate components
 
 
+
+ hooks and their usecases
+ 
+usememeo useref usenavigate usecallback

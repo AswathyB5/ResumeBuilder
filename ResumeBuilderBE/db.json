@@ -1,3 +1,32 @@
 {
-  "resume": []
+  "resume": [
+    {
+      "id": "74ac",
+      "fullName": "Aswathy",
+      "location": "Kollam",
+      "email": "aswathykurup17@gmail.com",
+      "phno": "23456789",
+      "github": "git@link",
+      "linkedin": "linkedin@link",
+      "portfolio": "portfolio@link",
+      "summary": "Aspiring MEARN STACK Developer",
+      "education": "",
+      "coursename": "BCA",
+      "college": "CASA Adoor",
+      "university": "Kerala",
+      "year": "2025",
+      "company": "Luminar",
+      "duration": "6 months",
+      "jobtitle": "MEARN STACK",
+      "skills": [
+        "React",
+        "Node",
+        "Express",
+        "javascript",
+        "html",
+        "css"
+      ],
+      "title": "MEARN STACK"
+    }
+  ]
 }

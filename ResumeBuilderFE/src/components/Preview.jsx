@@ -5,16 +5,38 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { FaDownload } from 'react-icons/fa';
+import jsPDF  from 'jspdf'
+import html2canvas from 'html2canvas' //take ss of the papper
+
 
 const Preview = ({resumeData}) => {
+
+const onDownloadClick = async () => {
+  const paperElement = document.getElementById("result");
+
+
+  const pappercanvas = await html2canvas(paperElement, { scale: 2});
+  const papperimgData = pappercanvas.toDataURL("image/png");
+console.log(papperimgData)
+
+  const pdf = new jsPDF("p", "mm", "a4");
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = (pappercanvas.height * pdfWidth)/pappercanvas.width;
+  pdf.addImage(papperimgData,"png",0,0,pdfWidth,pdfHeight)
+  pdf.save("resume.pdf")
+}
   return (
     <div className="container ms-5">
-      <Paper sx={{ height: 650 }} elevation={10}>
+      <Button className="fs-3" onClick={onDownloadClick}>
+        <FaDownload />
+      </Button>
+      <Paper id="result" sx={{ height: 650 }} elevation={10}>
         <Typography variant="h6" align="center">
           {resumeData.fullName || "Name"}
         </Typography>
         <Typography variant="h6" align="center">
-          {resumeData.title|| "Title"}
+          {resumeData.title || "Title"}
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Typography align="center">{resumeData.phno || "Ph no"} |</Typography>
@@ -29,7 +51,7 @@ const Preview = ({resumeData}) => {
         <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
           GitHub: <a href="">{resumeData.github || "GitHub Link"}</a>
           &nbsp;&nbsp;|&nbsp; LinkedIn:{" "}
-          <a href="">{resumeData.linkedin || "LikedIn Link"}</a>
+          <a href="">{resumeData.linkedin || "LinkedIn Link"}</a>
         </Box>
         <Box sx={{ textAlign: "center", marginTop: "8px" }}>
           Portfolio: <a href="">{resumeData.portfolio || "Portfolio Link"}</a>

@@ -5,10 +5,12 @@ import Col from "react-bootstrap/Col";
 import Preview from '../components/Preview';
 import StepperPage from '../components/StepperPage';
 import { duration } from '@mui/material/styles';
+import Edit from '../components/Edit';
 
 const Form = () => {
   const[resumeData,setResumeData]=useState({
     fullName:'',
+    title:"",
     location:'',
     email:'',
     phno:'',
@@ -22,7 +24,7 @@ const Form = () => {
     university:"",
     year:"",
     company:"",
-    location:"",
+    location1:"",
     duration:"",
     jobtitle:"",
     skills:[]
@@ -37,6 +39,7 @@ const Form = () => {
           <Preview resumeData={resumeData} />
         </Col>
       </Row>
+
     </div>
   );
 }
